@@ -31,4 +31,8 @@ describe Enumerable do
     count = [2,4,6,5,7,8].my_count{|elem| elem%2 == 0}
     expect(count).to eql(4)
   end 
+  it "returns an array that matches with the specific instruction" do
+    arr =  [2,4,6,5,7,8].my_map{|elem| elem%2 == 0}
+    expect(arr).to eql([true,true,true,false,false,true])
+  end
 end
