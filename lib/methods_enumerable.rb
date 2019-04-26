@@ -129,7 +129,7 @@ hash={a: 1, b: 2}
 #hash.my_each_with_index { |k, v, i| puts "#{k}: #{v} at index #{i}" }
 
 
-#print [1, 2, 2, 3, 5, 8, 9].my_select(&:odd?)
+print [1, 2, 2, 3, 5, 8, 9].my_select(&:odd?)
 #print hash.my_select { |k, v| v > 1 }
 
 # print arr.my_all?(/\D/)
@@ -153,7 +153,7 @@ hash={a: 1, b: 2}
 # print arr.my_map( &test)
 # print arr.my_map { |i| i*i }
 
-print [1,2,3,4,5].my_inject{|a,b| a+b}
+#print [1,2,3,4,5].my_inject{|a,b| a+b}
 
 # print multiply_els(arr)
 
