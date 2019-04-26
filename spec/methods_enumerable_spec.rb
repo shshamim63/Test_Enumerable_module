@@ -1,4 +1,4 @@
-require  'spec_helper'
+require_relative  '../lib/methods_enumerable'
 
 describe Enumerable do
   it "loops through enumerable objects element" do
@@ -14,5 +14,9 @@ describe Enumerable do
   it "retuens an array which selects the citerion " do
     res = [1,2,3,4].my_select(&:odd?)
     expect(res).to eql([1,3])  
+  end
+  it "it returns true or false if all the element match with the criterion" do
+    bool = ["ball","bat"].my_all?(String)
+    expect(bool).to eql(true)   
   end
 end
