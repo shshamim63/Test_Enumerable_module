@@ -11,5 +11,8 @@ describe Enumerable do
     [1,2,3,4].my_each_with_index{|v,i| res.push(i)}
     expect(res).to eql([0,1,2,3])
   end
-  
+  it "retuens an array which selects the citerion " do
+    res = [1,2,3,4].my_select(&:odd?)
+    expect(res).to eql([1,3])  
+  end
 end

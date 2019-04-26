@@ -129,7 +129,7 @@ hash={a: 1, b: 2}
 #hash.my_each_with_index { |k, v, i| puts "#{k}: #{v} at index #{i}" }
 
 
-print [1, 2, 2, 3, 5, 8, 9].my_select(&:odd?)
+#print [1, 2, 2, 3, 5, 8, 9].my_select(&:odd?)
 #print hash.my_select { |k, v| v > 1 }
 
 # print arr.my_all?(/\D/)
