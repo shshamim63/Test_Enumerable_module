@@ -27,4 +27,8 @@ describe Enumerable do
     bool = ["ball","bat"].my_none?(String)
     expect(bool).to eql(false)
   end
+  it "returns number of element that matched with the given condition" do
+    count = [2,4,6,5,7,8].my_count{|elem| elem%2 == 0}
+    expect(count).to eql(4)
+  end 
 end
