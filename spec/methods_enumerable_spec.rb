@@ -24,7 +24,7 @@ describe Enumerable do
     expect(bool).to eql(true)
   end
   it "returns boolean based on condition if none of the element matches with the condition" do
-    bool = ["ball","bat"].my_any?(String)
+    bool = ["ball","bat"].my_none?(String)
     expect(bool).to eql(false)
   end
 end
