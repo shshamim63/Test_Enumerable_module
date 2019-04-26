@@ -35,4 +35,8 @@ describe Enumerable do
     arr =  [2,4,6,5,7,8].my_map{|elem| elem%2 == 0}
     expect(arr).to eql([true,true,true,false,false,true])
   end
+  it "returns the result after performing the specific operation" do
+    res =  [2,4,6,5,7,8].my_inject(3){|res,acc| res += acc}
+    expect(res).to eql(35)
+  end
 end
