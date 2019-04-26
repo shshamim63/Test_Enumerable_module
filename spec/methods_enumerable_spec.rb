@@ -15,8 +15,16 @@ describe Enumerable do
     res = [1,2,3,4].my_select(&:odd?)
     expect(res).to eql([1,3])  
   end
-  it "it returns true or false if all the element match with the criterion" do
+  it "returns true or false if all the element match with the criterion" do
     bool = ["ball","bat"].my_all?(String)
     expect(bool).to eql(true)   
+  end
+  it "returns boolean based on condition if any element matches with the condition" do
+    bool = ["ball","bat"].my_any?(String)
+    expect(bool).to eql(true)
+  end
+  it "returns boolean based on condition if none of the element matches with the condition" do
+    bool = ["ball","bat"].my_any?(String)
+    expect(bool).to eql(false)
   end
 end
