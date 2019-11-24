@@ -26,8 +26,10 @@ module Enumerable
     elsif !pattern.nil?
       if pattern.is_a?(Regexp)
         my_each { |v| return false unless pattern =~ v.to_s }
+      elsif pattern.class == Class 
+        my_each { |v| return false unless v.is_a?(pattern)}
       else
-        my_each { |v| return false unless v.is_a?(pattern) }
+        my_each { |v| return false unless v == pattern }
       end
     else
       my_each { |v| return false unless v }
@@ -132,10 +134,11 @@ hash={a: 1, b: 2}
 #print [1, 2, 2, 3, 5, 8, 9].my_select(&:odd?)
 #print hash.my_select { |k, v| v > 1 }
 
-# print arr.my_all?(/\D/)
-# print arr.my_all?(String)
-# print hash.my_all? { |k, v| v.is_a? Integer }
-# print hash.my_all?(/\d/)
+ puts arr.my_all?(/\D/)
+ puts arr.my_all?(String)
+ puts hash.my_all? { |k, v| v.is_a? Integer }
+ puts hash.my_all?(/\d/)
+ puts hash.my_all?(3)
 
 # print arr.my_any?
 # print [1, 2, nil, 3, 5, 8, 9].my_any? { |v| v || v.nil? }
