@@ -1,11 +1,12 @@
 require_relative  '../lib/methods_enumerable'
 
-ARRAY_SIZE = 5
+ARRAY_SIZE = 100
 HIGHEST_VALUE = 9
 LOWEST_VALUE = 0
 describe Enumerable do
   let(:array) { Array.new(ARRAY_SIZE) { rand(LOWEST_VALUE..HIGHEST_VALUE) } }
-
+  let(:range) { Range.new(LOWEST_VALUE, HIGHEST_VALUE) }
+  let(:words) {%w[ruby python c++ c javascript html5 css3]}
   describe 'my_each' do 
     it 'it returns an enumarator if no block is given' do
       expect(array.my_each).to be_an(Enumerator)  
@@ -58,6 +59,20 @@ describe Enumerable do
       each_output= ''
       array.each_with_index(&block)
       expect(my_each_output).to eq(each_output)
+    end
+  end
+
+  describe 'my_select' do
+    it 'return an enumerator if no block is given' do
+      expect(array.my_select).to be_an(Enumerator)
+    end
+
+    it 'returns an array containing the items for which block return a true value' do
+      block = proc { |val| val % 3 == 0 }
+      string_block = proc { |word| word.length > 3 }
+      expect(array.my_select(&block)).to eql(array.select(&block))
+      expect(range.my_select(&block)).to eql(range.select(&block))
+      expect(words.my_select(&string_block)).to eql(words.select(&string_block))
     end
   end
 end

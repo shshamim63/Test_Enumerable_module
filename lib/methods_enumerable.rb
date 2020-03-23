@@ -9,7 +9,7 @@ module Enumerable
   end
 
   def my_each_with_index
-    return to_enum(:my_each) unless block_given?
+    return to_enum(:my_each_with_index) unless block_given?
     i = 0
     arr = to_a.dup
     for item in self
@@ -20,9 +20,10 @@ module Enumerable
   end
 
   def my_select
+    return to_enum(:my_select) unless block_given?
     res = []
     my_each { |v| res.push(v) if yield(v) }
-    return res
+    res
   end
 
   def my_all?(pattern = nil)
