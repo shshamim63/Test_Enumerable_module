@@ -1,42 +1,35 @@
 require_relative  '../lib/methods_enumerable'
 
+ARRAY_SIZE = 5
+HIGHEST_VALUE = 9
+LOWEST_VALUE = 0
 describe Enumerable do
-  it "loops through enumerable objects element" do
-    res = []
-    [1,2,3,4].my_each{|v| res.push(v + 1)}
-    expect(res).to eql([2,3,4,5])  
-  end
-  it "loops through enumerable objects element with index" do
-    res = []
-    [1,2,3,4].my_each_with_index{|v,i| res.push(i)}
-    expect(res).to eql([0,1,2,3])
-  end
-  it "retuens an array which selects the citerion " do
-    res = [1,2,3,4].my_select(&:odd?)
-    expect(res).to eql([1,3])  
-  end
-  it "returns true or false if all the element match with the criterion" do
-    bool = ["ball","bat"].my_all?(String)
-    expect(bool).to eql(true)   
-  end
-  it "returns boolean based on condition if any element matches with the condition" do
-    bool = ["ball","bat"].my_any?(String)
-    expect(bool).to eql(true)
-  end
-  it "returns boolean based on condition if none of the element matches with the condition" do
-    bool = ["ball","bat"].my_none?(String)
-    expect(bool).to eql(false)
-  end
-  it "returns number of element that matched with the given condition" do
-    count = [2,4,6,5,7,8].my_count{|elem| elem%2 == 0}
-    expect(count).to eql(4)
-  end 
-  it "returns an array that matches with the specific instruction" do
-    arr =  [2,4,6,5,7,8].my_map{|elem| elem%2 == 0}
-    expect(arr).to eql([true,true,true,false,false,true])
-  end
-  it "returns the result after performing the specific operation" do
-    res =  [2,4,6,5,7,8].my_inject(3){|res,acc| res += acc}
-    expect(res).to eql(35)
+  let(:array) { Array.new(ARRAY_SIZE) { rand(LOWEST_VALUE..HIGHEST_VALUE) } }
+
+  describe 'my_each' do 
+    it 'it returns an enumarator if no block is given' do
+      expect(array.my_each).to be_an(Enumerator)  
+    end
+
+    it 'loops through each element in the array and return self' do
+      expect(array.my_each { |val| val }).to eq(array.each { |val| val })
+    end
+
+    it 'loops through each element and provies output besed on block' do
+      my_each_output = 0
+      array.my_each { |num| my_each_output += num }
+      each_output = 0
+      array.each { |num| each_output += num }
+      expect(my_each_output).to eq(each_output)
+    end
+    it 'calls the given block once for each element in self' do
+      each_output = ''
+      block = proc { |num| each_output += num.to_s}
+      array.my_each(&block)
+      my_each_output = each_output.dup
+      each_output= ''
+      array.each(&block)
+      expect(my_each_output).to eq(each_output)
+    end
   end
 end
