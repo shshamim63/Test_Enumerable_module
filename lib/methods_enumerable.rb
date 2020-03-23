@@ -9,11 +9,14 @@ module Enumerable
   end
 
   def my_each_with_index
+    return to_enum(:my_each) unless block_given?
     i = 0
+    arr = to_a.dup
     for item in self
       yield(item, i)
       i += 1
     end
+    arr
   end
 
   def my_select
