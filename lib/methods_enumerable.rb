@@ -46,14 +46,16 @@ module Enumerable
   def my_any?(pattern = nil)
     if block_given?
       my_each { |v| return true if yield(v) }
-    elsif !pattern.nil?
+    elsif pattern
       if pattern.is_a?(Regexp)
         my_each { |v| return true if pattern =~ v.to_s }
-      else
+      elsif pattern.class == Class
         my_each { |v| return true if v.is_a?(pattern) }
+      else
+        my_each { |v| return true if v == pattern }
       end
     else
-      my_each { |v| v != nil ? true : false }
+      my_each { |v| return true if v }
     end
     false
   end
@@ -64,8 +66,10 @@ module Enumerable
     elsif !pattern.nil?
       if pattern.is_a?(Regexp)
         my_each { |v| return false if pattern =~ v.to_s }
-      else
+      elsif pattern.class == Class
         my_each { |v| return false if v.is_a?(pattern) }
+      else
+        my_each { |v| return false if v == pattern }
       end
     else
       my_each { |v| return false if v }
@@ -97,16 +101,27 @@ module Enumerable
     res
   end
 
-  def my_inject(arg = nil)
-    acc, nxt, start = nil, nil, nil
+  def my_inject(*arg)
+    acc, nxt, start, sym = nil, nil, nil, nil
     if arg.nil?
       acc = self[0]
       nxt = self[1]
       start = 1
-    else
-      acc = arg
+    elsif arg.length == 2
+      acc = arg[0]
       nxt = self[0]
       start = 0
+      sym = arg[1]
+    else
+      if arg[0].is_a?(Integer)
+        acc = arg[0]
+        start = 0
+        sym = nil
+      else
+        acc = self[0]
+        start = 1
+        sym = arg[0]
+      end
     end
 
     if block_given?
@@ -115,10 +130,18 @@ module Enumerable
         nxt = self[i + 1]
       end
       acc
+    else
+      for i in start...self.size
+        acc = acc.send(sym, nxt)
+        nxt = self[i + 1]
+      end
+      acc
     end
   end
 end
 
 def multiply_els(arr)
-  arr.my_inject { |a, b| a * b }
+  arr.my_inject(:*)
 end
+
+p multiply_els([1, 2 ,3])
