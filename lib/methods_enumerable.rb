@@ -110,53 +110,8 @@ module Enumerable
       acc
     end  
   end
-
-
 end
 
 def multiply_els(arr)
   arr.my_inject{|a,b| a*b}
 end
-arr=[3,4,6,8,7]
-hash={a: 1, b: 2}
-
-# print arr.my_inject(2){|a,b| a + b}
-
-# TEST
-
-#arr.my_each{|item| puts item.to_s}
-#hash.my_each{|item| puts item.to_s}
-
-#arr.my_each_with_index { |v, i| puts "#{v} at index #{i}" }
-#hash.my_each_with_index { |k, v, i| puts "#{k}: #{v} at index #{i}" }
-
-
-#print [1, 2, 2, 3, 5, 8, 9].my_select(&:odd?)
-#print hash.my_select { |k, v| v > 1 }
-
- puts arr.my_all?(/\D/)
- puts arr.my_all?(String)
- puts hash.my_all? { |k, v| v.is_a? Integer }
- puts hash.my_all?(/\d/)
- puts hash.my_all?(3)
-
-# print arr.my_any?
-# print [1, 2, nil, 3, 5, 8, 9].my_any? { |v| v || v.nil? }
-# print arr.my_any?(/\d/)
-
-# print arr.my_none?
-# print [1, 2, nil, 3, 5, 8, 9].my_none? { |v| v || v.nil? }
-# print arr.my_none?(/\d/)
-
-# print arr.my_count
-# print arr.my_count(2)
-# print arr.my_count{ |x| x%2==0 }
-
-# test = Proc.new { |i| i*i } 
-# print arr.my_map( &test)
-# print arr.my_map { |i| i*i }
-
-#print [1,2,3,4,5].my_inject{|a,b| a+b}
-
-# print multiply_els(arr)
-
