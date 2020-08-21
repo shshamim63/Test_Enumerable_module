@@ -16,9 +16,8 @@ module Enumerable
   def my_select
       res = []
       my_each { |v| res.push(v) if yield(v) }
-      return res
+      res
   end
-
 
   def my_all?(pattern = nil)
     if block_given?
